@@ -1,0 +1,47 @@
+def chiper():
+    try:
+        with open("plain.txt", "r") as fin, open("cipher.txt", "w") as fout:
+            K = input("Kata Kunci: ").strip()
+            if not K:
+                print("Kata kunci tidak boleh kosong.")
+                return
+            
+            n = len(K)
+            i = 0
+            
+            while True:
+                P = fin.read(1)
+                if not P:
+                    break
+                C = chr(ord(P) ^ ord(K[i]))
+                fout.write(C)
+                i = (i + 1) % n
+                
+    except FileNotFoundError:
+        print("File tidak ditemukan.")
+    except IOError as e:
+        print(f"Terjadi kesalahan I/O: {e}")
+
+def dechiper():
+    try:
+        with open("cipher.txt", "r") as fin, open("plain.txt", "w") as fout:
+            K = input("Kata Kunci: ").strip()
+            if not K:
+                print("Kata kunci tidak boleh kosong.")
+                return
+            
+            n = len(K)
+            i = 0
+            
+            while True:
+                C = fin.read(1)
+                if not C:
+                    break
+                P = chr(ord(C) ^ ord(K[i]))
+                fout.write(P)
+                i = (i + 1) % n
+                
+    except FileNotFoundError:
+        print("File tidak ditemukan.")
+    except IOError as e:
+        print(f"Terjadi kesalahan I/O: {e}")
